@@ -90,6 +90,18 @@ class LinkedList
       @tail = new_node if new_node.next_node.nil?
     end
   end
+
+  def remove_at(index)
+    if index.zero?
+      @head = at(1)
+    elsif at(index) == @tail
+      @tail = at(index - 1)
+      @tail.next_node = nil
+    else
+      prev_node = at(index - 1)
+      prev_node.next_node = at(index + 1)
+    end
+  end
 end
 my_list = LinkedList.new
 my_list.append('new')
@@ -98,5 +110,6 @@ my_list.prepend('first')
 puts "Size: #{my_list.size}"
 my_list.insert_at('value_1', 1)
 my_list.insert_at('value_2', 3)
+my_list.remove_at(2)
 puts "Contains last? #{my_list.contains?('last')}"
 puts my_list.to_s
