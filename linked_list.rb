@@ -2,6 +2,8 @@ require_relative 'node'
 require 'pry-byebug'
 
 class LinkedList
+  attr_reader :head, :tail
+
   def initialize
     @head = nil
     @tail = nil
@@ -103,13 +105,3 @@ class LinkedList
     end
   end
 end
-my_list = LinkedList.new
-my_list.append('new')
-my_list.append('last')
-my_list.prepend('first')
-puts "Size: #{my_list.size}"
-my_list.insert_at('value_1', 1)
-my_list.insert_at('value_2', 3)
-my_list.remove_at(2)
-puts "Contains last? #{my_list.contains?('last')}"
-puts my_list.to_s
