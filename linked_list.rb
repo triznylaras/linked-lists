@@ -79,13 +79,24 @@ class LinkedList
     end
     print 'nil'
   end
+
+  def insert_at(value, index)
+    if index.zero?
+      prepend(value)
+    else
+      new_node = Node.new(value, at(index))
+      prev_node = at(index - 1)
+      prev_node.next_node = new_node
+      @tail = new_node if new_node.next_node.nil?
+    end
+  end
 end
 my_list = LinkedList.new
 my_list.append('new')
 my_list.append('last')
 my_list.prepend('first')
 puts "Size: #{my_list.size}"
-puts "Value at 1: #{my_list.at(1)}"
-puts "Pop linked lists: #{my_list.pop}"
+my_list.insert_at('value_1', 1)
+my_list.insert_at('value_2', 3)
 puts "Contains last? #{my_list.contains?('last')}"
 puts my_list.to_s
