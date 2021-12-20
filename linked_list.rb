@@ -33,31 +33,59 @@ class LinkedList
     counter
   end
 
-  def head
-  end
-
-  def tail
-  end
-
   def at(index)
+    current_node = @head
+    index.times do
+      current_node = current_node.next_node
+    end
+    current_node
   end
 
   def pop
+    nil if size < 1
+    current_node = @head
+    current_node = current_node.next_node until current_node.next_node == @tail
+    current_node.next_node = nil
+    @tail = current_node
   end
 
   def contains?(value)
+    current_node = @head
+    contains = false
+    until current_node.nil?
+      contains = true if current_node.data == value
+      current_node = current_node.next_node
+    end
+    contains
   end
 
   def find(value)
+    current_node = @head
+    index = 0
+    found = false
+    until current_node.nil?
+      found = true if current_node.data == value
+      current_node = current_node.next_node
+      index += 1 unless found
+    end
+    index if found
   end
 
   def to_s
+    current_node = @head
+    until current_node.nil?
+      print "( #{current_node.data} ) -> "
+      current_node = current_node.next_node
+    end
+    print 'nil'
   end
 end
 my_list = LinkedList.new
-puts my_list
+my_list.append('new')
 my_list.append('last')
-puts my_list
 my_list.prepend('first')
-puts my_list
 puts "Size: #{my_list.size}"
+puts "Value at 1: #{my_list.at(1)}"
+puts "Pop linked lists: #{my_list.pop}"
+puts "Contains last? #{my_list.contains?('last')}"
+puts my_list.to_s
